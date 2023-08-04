@@ -20,7 +20,7 @@ This file contains macros used for printing efficiently and with colors
 #define     DEBUG(i)                printf("%d\n",i);
 
 //Communication buffers
-#define     BUF_LEN                 64
+#define     BUF_LEN                 48
 #define     TOKEN_ERROR             "1"
 #define     TOKEN_CORRECT           "0"
 #define     TOKEN_ERROR_MSG         "Connection Stopped - Verification Token Refused"

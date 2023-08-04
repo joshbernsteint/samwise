@@ -23,7 +23,7 @@
 * Limitations
   * Only work on Microsoft Edge / Google chrome
 
-### Version 0.0.2 (**CURRENT VERSION**)
+### Version 0.0.2 
 * Features
   * **New commands**
     * `OPEN`
@@ -35,7 +35,7 @@
 * Limitations
   * Only work on Microsoft Edge / Google chrome
 
-### Version 0.0.3 
+### Version 0.0.3 (**CURRENT VERSION**)
 * Features
   * Backend: Canvas API helper functions
   * **New Commands**
