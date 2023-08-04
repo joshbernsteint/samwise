@@ -160,11 +160,12 @@ int main() {
             recv(clientSocket,buffer,BUF_LEN,0);
             receivedNum = atoi((buffer + TOKEN_LENGTH));
             if(strcmp(buffer,VERIFY_TOKEN) != 0){
-                PRINTE(TOKEN_ERROR);
+                PRINTE(TOKEN_ERROR_MSG);
                 send(clientSocket,TOKEN_ERROR,strlen(TOKEN_ERROR)+1,0);
             }
             else{
                 send(clientSocket,TOKEN_CORRECT, strlen(TOKEN_CORRECT)+1,0);
+                PRINTC(CYAN,TOKEN_CORRECT_MSG);
                 commandId = receivedNum % 10000;
                 if(commandId == 0){
                     PRINTC(YELLOW, "Shutting down the server...");

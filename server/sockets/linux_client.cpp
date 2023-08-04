@@ -13,6 +13,7 @@
 int main(int argc,char* argv[]){
 
     int socketfd;
+    int retVal = 0;
     struct sockaddr_in addr;
     socklen_t addr_size = sizeof(addr);
 
@@ -47,7 +48,8 @@ int main(int argc,char* argv[]){
         return -1;
     }
     recv(socketfd, buffer, BUF_LEN, 0);
-    TOCONSOLE(buffer);
+    retVal = atoi(buffer);
+    DEBUG(retVal);
 
     return 0;
 }

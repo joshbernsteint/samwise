@@ -21,5 +21,7 @@ This file contains macros used for printing efficiently and with colors
 
 //Communication buffers
 #define     BUF_LEN                 64
-#define     TOKEN_ERROR             "Connection Stopped - Verification Token Refused"
-#define     TOKEN_CORRECT           "Connection sustained - Token Correct"
+#define     TOKEN_ERROR             1
+#define     TOKEN_CORRECT           0
+#define     TOKEN_ERROR_MSG         "Connection Stopped - Verification Token Refused"
+#define     TOKEN_CORRECT_MSG       "Connection sustained - Token Correct"
