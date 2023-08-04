@@ -104,6 +104,7 @@ int main() {
     int receivedNum = -1;
     int commandId = -1;
     char buffer[BUF_LEN];
+    const int TOKEN_LENGTH = strlen(VERIFY_TOKEN) + 1;
 
     ZeroMemory(&serverAddr, sizeof(serverAddr));
     serverAddr.ai_family = AF_INET;
@@ -165,7 +166,7 @@ int main() {
             }
             else{
                 send(clientSocket,TOKEN_CORRECT, strlen(TOKEN_CORRECT)+1,0);
-                PRINTC(CYAN,TOKEN_CORRECT_MSG);
+                PRINTC(CYAN,TOKEN_CORRECT_MSG)
                 commandId = receivedNum % 10000;
                 if(commandId == 0){
                     PRINTC(YELLOW, "Shutting down the server...");

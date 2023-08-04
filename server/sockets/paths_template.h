@@ -15,6 +15,5 @@
 
 
 #define VERIFY_TOKEN ""
-#define TOKEN_LENGTH -1
 #define SHUTCODE -1
 #define HASPATH 1

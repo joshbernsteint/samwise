@@ -15,6 +15,7 @@ int main(int argc,char* argv[]){
 
     int socketfd;
     int retVal = 0;
+    const int TOKEN_LENGTH = strlen(VERIFY_TOKEN) + 1;
     struct sockaddr_in addr;
     socklen_t addr_size = sizeof(addr);
 

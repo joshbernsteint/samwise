@@ -13,7 +13,6 @@ Numbers:
 -----------
 * `NUM_APPS`: The number of absolute file paths being used for the "OPEN" command
 * `SHUTCODE`: A 2-digit number used to verify the "SHUTDOWN COMPUTER" command
-* `TOKEN_LENGTH`: A number indicating the length of the `VERIFY_TOKEN` string (including null pointer)
 * `PORTN`: A number used to indicate the port for the client to connect to
 
 Strings or misc.
