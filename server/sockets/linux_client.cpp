@@ -3,6 +3,7 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <string.h>
+#include <string>
 
 #include "paths.h"//This is omitted from GitHub because it contains security data
 #include "command_id.h"
