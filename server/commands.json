@@ -1,0 +1,90 @@
+{
+    "OPEN": {
+        "options": [{
+            "name": "OPEN ONE",
+            "id": 1.1,
+            "args": ["[W]"],
+            "has_response": false,
+            "response": "Opening [W]"
+        },
+        {
+            "name": "OPEN LIST",
+            "id": 1.2,
+            "args": ["[W]","..."],
+            "has_response": false,
+            "response": "Opening [W]..."
+        }],
+        "accepted": {"W": ["WORD","POWERPOINT","EXCEL","STEAM","DISCORD"]}
+    },
+    "SET": {
+        "options": [{
+            "name": "TIMER",
+            "id": 2.1,
+            "args": ["[N]","[T]","TIMER"],
+            "has_response": false,
+            "response": "Starting a timer for [TIME]"
+        },
+        {
+            "name": "TIMER",
+            "id": 2.2,
+            "args": ["TIMER", "[N]","[T]"],
+            "has_response": false,
+            "response": "Starting a timer for [TIME]"
+        },
+        {
+            "name": "TIMER",
+            "id": 2.3,
+            "args": ["[T]","TIMER","[N]"],
+            "has_response": false,
+            "response": "Starting a timer for [TIME]"
+        }]
+    },
+    "STOP": {
+        "options": [{
+            "name": "LISTENING",
+            "id": 0.1,
+            "args": ["LISTENING"],
+            "has_response": true,
+            "response": {
+                "prompt": "Are you sure?",
+                "type": "CONFIRM",
+                "options": {
+                    "YEP": true,
+                    "YES": true,
+                    "YEAH": true,
+                    "SURE": true,
+
+                    "NO": false,
+                    "NAH": false,
+                    "NEVERMIND": false,
+                    "NOPE": false
+                }
+            }
+        }
+    ]
+    },
+    "SHUT": {
+        "options": [{
+            "name": "Shutdown Computer",
+            "id": 3.1,
+            "args": ["[W]"],
+            "has_response": true,
+            "response": {
+                "prompt": "Are you sure? This will immediately shutdown the computer",
+                "type": "CONFIRM",
+                "options": {
+                    "YEP": true,
+                    "YES": true,
+                    "YEAH": true,
+                    "SURE": true,
+
+                    "NO": false,
+                    "NAH": false,
+                    "NEVERMIND": false,
+                    "NOPE": false
+                }
+            }
+        }],
+        "accepted": {"W": ["DOWN"]}
+    }
+}

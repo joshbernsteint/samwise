@@ -1,0 +1,9 @@
+{
+    "CONFIRM":{
+        "prompt": "Are you sure?",
+        "options": {
+            "YES": ["YEP","YES","YEAH","SURE"],
+            "NO": ["NOPE","NO","NEVERMIND","NAH"]
+        }
+    }
+}

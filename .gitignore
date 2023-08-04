@@ -1,0 +1,5 @@
+.tokens
+.env
+node_modules/
+paths.json
+*.exe
