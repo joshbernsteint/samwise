@@ -70,7 +70,8 @@ int parseCommand(int command_id, const char** apps){
         case SHUTDOWN:
             if(argCode == SHUTCODE){
                 //This will immediately shutdown the computer!
-                retVal = makeProcess(NULL,SHUTCOMPUTER,&app_si,&app_pi);
+                TOCONSOLE("Shutting down computer...")
+                // retVal = makeProcess(NULL,SHUTCOMPUTER,&app_si,&app_pi);
             }
             else{
                 retVal = -1;
@@ -159,9 +160,11 @@ int main() {
             recv(clientSocket,buffer,BUF_LEN,0);
             receivedNum = atoi((buffer + TOKEN_LENGTH));
             if(strcmp(buffer,VERIFY_TOKEN) != 0){
-                PRINTE("Token received not valid!");
+                PRINTE(TOKEN_ERROR);
+                send(clientSocket,TOKEN_ERROR,strlen(TOKEN_ERROR)+1,0);
             }
             else{
+                send(clientSocket,TOKEN_CORRECT, strlen(TOKEN_CORRECT)+1,0);
                 commandId = receivedNum % 10000;
                 if(commandId == 0){
                     PRINTC(YELLOW, "Shutting down the server...");
@@ -172,6 +175,7 @@ int main() {
 
                 }
             }
+
             closesocket(clientSocket);
             PRINTC(YELLOW, "Connection lost.\n");
         }

@@ -34,7 +34,7 @@ int main(int argc,char* argv[]){
 
     //Attempt to connect to the server
     if(connect(socketfd,(struct sockaddr*)&addr, addr_size) != 0){
-        PRINTE(perror("connect"));
+        PRINTE("Connection to server failed.");
         return -1;
     }
     else{
@@ -46,6 +46,9 @@ int main(int argc,char* argv[]){
         PRINTE("Send failed.")
         return -1;
     }
+    recv(socketfd, buffer, BUF_LEN, 0);
+    TOCONSOLE(buffer);
+
     return 0;
 }
 #else

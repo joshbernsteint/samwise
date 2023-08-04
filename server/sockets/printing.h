@@ -19,5 +19,7 @@ This file contains macros used for printing efficiently and with colors
 #define     PRINTE(str)             printf("%sError: %s%s\n",RED,str,BASE);
 #define     DEBUG(i)                printf("%d\n",i);
 
-//Other
-#define     BUF_LEN                 48
+//Communication buffers
+#define     BUF_LEN                 64
+#define     TOKEN_ERROR             "Connection Stopped - Verification Token Refused"
+#define     TOKEN_CORRECT           "Connection sustained - Token Correct"
