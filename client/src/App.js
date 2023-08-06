@@ -10,6 +10,7 @@ import TimerList from './utils/timerList';
 
 function App() {
   const [commands, setCommands] = useState(null);
+  const [responses, setResponses] = useState(null);
   const [uniqueCommands, setUniqueCommands] = useState([]);
   const [current_cmd, setCurrentCmd] = useState(null);
   const [awaitingResponse, setAwaitingResponse] = useState(false);
@@ -22,7 +23,8 @@ function App() {
   useEffect(()=>{
     async function fetchCommands(){
       await fetch('http://localhost:5000/get_command_list').then(res => res.json().then(data => {
-        setCommands(data);
+        setCommands(data.commands);
+        setResponses(data.responses);
         setCurrentCmd(new Command("",[],-1,data))
         setUniqueCommands(Object.keys(data));
       }))
@@ -72,9 +74,11 @@ function App() {
           case "CONFIRM":
             for (let index = 0; index < listPhrase.length; index++) {
               const element = listPhrase[index];
-              if(isIn(element,Object.keys(response_obj.options))){
-                const retVal = response_obj.options[element];
-                  current_cmd.setResponse({error: false, val: retVal});             
+              if(isIn(element,Object.keys(responses.CONFIRM.options.YES))){
+                  current_cmd.setResponse({error: false, val: true});
+              }
+              else if (isIn(element,Object.keys(responses.CONFIRM.options.NO))){
+                  current_cmd.setResponse({error: false, val: false});
               }
             }
             break;

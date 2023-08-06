@@ -117,7 +117,7 @@ class Command{
         }
     }
 
-    getResponseObj(){
+    getResponseType(){
         if(this.key !== ""){
             return this.options[this.opt_index].response;
         }

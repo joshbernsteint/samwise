@@ -50,9 +50,7 @@ int main(int argc,char* argv[]){
         return -1;
     }
     recv(socketfd, buffer, BUF_LEN, 0);
-    retVal = atoi(buffer);
-    DEBUG(retVal);
-
+    TOCONSOLE(buffer);
     return 0;
 }
 #else

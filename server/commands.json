@@ -47,18 +47,7 @@
             "has_response": true,
             "response": {
                 "prompt": "Are you sure?",
-                "type": "CONFIRM",
-                "options": {
-                    "YEP": true,
-                    "YES": true,
-                    "YEAH": true,
-                    "SURE": true,
-
-                    "NO": false,
-                    "NAH": false,
-                    "NEVERMIND": false,
-                    "NOPE": false
-                }
+                "type": "CONFIRM"
             }
         }
     ]
@@ -66,23 +55,12 @@
     "SHUT": {
         "options": [{
             "name": "Shutdown Computer",
-            "id": 3.1,
+            "id": 9.9,
             "args": ["[W]"],
             "has_response": true,
             "response": {
                 "prompt": "Are you sure? This will immediately shutdown the computer",
-                "type": "CONFIRM",
-                "options": {
-                    "YEP": true,
-                    "YES": true,
-                    "YEAH": true,
-                    "SURE": true,
-
-                    "NO": false,
-                    "NAH": false,
-                    "NEVERMIND": false,
-                    "NOPE": false
-                }
+                "type": "CONFIRM"
             }
         }],
         "accepted": {"W": ["DOWN"]}

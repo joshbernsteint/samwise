@@ -16,11 +16,11 @@ This file contains macros used for printing efficiently and with colors
 //Printing Macros
 #define     TOCONSOLE(str)          printf("%s\n",str);
 #define     PRINTC(color,str)       printf("%s%s%s\n",color,str,BASE);
-#define     PRINTE(str)             printf("%sError: %s%s\n",RED,str,BASE);
+#define     PRINTE(str)             fprintf(stderr, "%sError: %s%s\n",RED,str,BASE);
 #define     DEBUG(i)                printf("%d\n",i);
 
 //Communication buffers
-#define     BUF_LEN                 48
+#define     BUF_LEN                 64
 #define     TOKEN_ERROR             "1"
 #define     TOKEN_CORRECT           "0"
 #define     TOKEN_ERROR_MSG         "Connection Stopped - Verification Token Refused"

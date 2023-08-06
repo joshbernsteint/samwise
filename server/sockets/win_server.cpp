@@ -51,7 +51,7 @@ int makeProcess(const char* cmd,const char* args ,STARTUPINFO* si, PROCESS_INFOR
 int parseCommand(int command_id, const char** apps){
     int opCode = command_id / 100;
     int argCode = command_id % 100;
-    int retVal = 0;
+    int retVal = -1;
     STARTUPINFO app_si;
     PROCESS_INFORMATION app_pi;
 
@@ -63,9 +63,6 @@ int parseCommand(int command_id, const char** apps){
             {
                 retVal = makeProcess(apps[argCode-1],NULL,&app_si,&app_pi); // Creates the process to hold the app
             }
-            else{
-                retVal = -1;
-            }
             break;
         case SHUTDOWN:
             if(argCode == SHUTCODE){
@@ -73,13 +70,9 @@ int parseCommand(int command_id, const char** apps){
                 TOCONSOLE("Shutting down computer...")
                 // retVal = makeProcess(NULL,SHUTCOMPUTER,&app_si,&app_pi);
             }
-            else{
-                retVal = -1;
-            }
             break;
         
         default:
-            retVal = -1;
             break;
     }
 
@@ -87,11 +80,9 @@ int parseCommand(int command_id, const char** apps){
     return retVal;
 }
 
-
 int main() {
 
     const char* apps[] = {WRD, POWERPOINT, EXCEL, STEAM, DISCORD};
-
     SOCKET serverSocket = INVALID_SOCKET;
     SOCKET clientSocket = INVALID_SOCKET;
 
