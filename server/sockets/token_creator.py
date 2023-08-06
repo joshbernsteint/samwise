@@ -35,8 +35,8 @@ if __name__ == "__main__":
     printc(YELLOW,"Generating token...")
     token = makeToken(token_length)
     printc(GREEN,"Token successfully generated!\n")
-    printc(CYAN,f'Token: {YELLOW}"{token}"')
-    printc(CYAN,f'Length: {YELLOW}{token_length}')
+    printc(CYAN,f'Token: {YELLOW}{token}')
+    printc(CYAN,f'Length (with "\\0"): {YELLOW}{token_length+1}')
 
 
 
