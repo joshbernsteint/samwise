@@ -55,7 +55,6 @@ int parseCommand(int command_id, const char** apps){
     STARTUPINFO app_si;
     PROCESS_INFORMATION app_pi;
 
-
     switch (opCode)
     {
         case OPEN:
@@ -82,7 +81,7 @@ int parseCommand(int command_id, const char** apps){
 
 int main() {
 
-    const char* apps[] = {WRD, POWERPOINT, EXCEL, STEAM, DISCORD};
+    const char* apps[] = {WRD, POWERPOINT, EXCEL, STEAM, DISCORD, YOUTUBE};
     SOCKET serverSocket = INVALID_SOCKET;
     SOCKET clientSocket = INVALID_SOCKET;
 
@@ -102,6 +101,7 @@ int main() {
     serverAddr.ai_socktype = SOCK_STREAM;
     serverAddr.ai_protocol = IPPROTO_TCP;
     serverAddr.ai_flags = AI_PASSIVE;
+    
 
     PRINTC(YELLOW,"Creating socket...");
     if(WSAStartup(MAKEWORD(2,2), &socketData) != 0){
