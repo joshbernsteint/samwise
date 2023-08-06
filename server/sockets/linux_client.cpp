@@ -25,10 +25,13 @@ int main(int argc,char* argv[]){
     strcpy((buffer+TOKEN_LENGTH),argv[1]);
 
     //Attempting to create the socket
+    PRINTC(YELLOW, "Attempting to create socket...")
     if((socketfd = socket(PF_INET,SOCK_STREAM,0)) == -1){
         PRINTE("Creating socket failed.");
         return -1;
     }
+    PRINTC(GREEN, "Socket successfully created!\n")
+
     //Initialize addr
     memset(&addr, 0, sizeof(addr));
     addr.sin_family = AF_INET;
@@ -36,12 +39,13 @@ int main(int argc,char* argv[]){
     addr.sin_addr.s_addr = inet_addr(NETWORK_IP);
 
     //Attempt to connect to the server
+    PRINTC(YELLOW, "Attempting to connect to server...")
     if(connect(socketfd,(struct sockaddr*)&addr, addr_size) != 0){
         PRINTE("Connection to server failed.");
         return -1;
     }
     else{
-        PRINTC(GREEN, "Successfully connected to the server!");
+        PRINTC(GREEN, "Successfully connected to the server!\n");
     }
     
     //Send a message to the server
