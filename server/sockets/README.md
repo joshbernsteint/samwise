@@ -7,6 +7,7 @@ Absolute File paths:
 * `EXCEL`: Path to Microsoft Excel
 * `STEAM`: Path to Steam
 * `DISCORD`: Path to Discord
+* `YOUTUBE`: Path to youtube.bat
 * `SHUTCOMPUTER`: Path to shutdown.bat
 
 Numbers:
@@ -23,4 +24,4 @@ Strings or misc.
 * `HASPATH`: A macro used to show that paths.h is properly implemented for the source code (Can be any value)
 
 
-The file `paths_template.h` has been provided with the macros already defined, but with incorrect values. These values can be filled in by you and the file renamed to paths.h for the source code to compile correctly.
+If there is not a `paths.h` file in this direcotry, then the two C++ files will not correctly compile.
