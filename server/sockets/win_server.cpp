@@ -58,9 +58,9 @@ int parseCommand(int command_id, const char** apps){
     switch (opCode)
     {
         case OPEN:
-            if(argCode > 0 && argCode <= NUM_APPS)//Ensure the argCode is proper
+            if(argCode > 0 && argCode <= NUM_APPS*2)//Ensure the argCode is proper
             {
-                retVal = makeProcess(apps[argCode-1],NULL,&app_si,&app_pi); // Creates the process to hold the app
+                retVal = makeProcess(apps[(argCode-1)*2],apps[((argCode-1)*2)+1],&app_si,&app_pi); // Creates the process to hold the app
             }
             break;
         case SHUTDOWN:
