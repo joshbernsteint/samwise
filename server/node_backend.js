@@ -42,7 +42,7 @@ function getCommandID(node_id, args){
 
 
 app.get('/', (req, res) => {
-    res.send('Hello World!')
+    res.send('')
 })
 
 app.get('/get_command_list', (req,res) => {

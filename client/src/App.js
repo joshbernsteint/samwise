@@ -7,6 +7,7 @@ import { isIn } from './utils/tools';
 import Timer from './utils/timer';
 import SpeechRecognition from './utils/speechRecognition';
 import TimerList from './utils/timerList';
+import runCommands from './utils/runCommands';
 
 function App() {
   const [commands, setCommands] = useState(null);
@@ -25,7 +26,7 @@ function App() {
       await fetch('http://localhost:5000/get_command_list').then(res => res.json().then(data => {
         setCommands(data.commands);
         setResponses(data.responses);
-        setCurrentCmd(new Command("",[],-1,data))
+        setCurrentCmd(new Command("",[],-1,data));
         setUniqueCommands(Object.keys(data));
       }))
     }
@@ -37,6 +38,7 @@ function App() {
 
   function parseInput(listPhrase){
       if(!awaitingResponse || current_cmd.key === ""){
+        console.log(listPhrase);
         for (let index = 0; index < listPhrase.length; index++) {
             if(isIn(listPhrase[index],uniqueCommands)){
                 if(current_cmd.key !== ""){

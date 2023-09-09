@@ -7,9 +7,6 @@ function runCommands(cmd_list, timerList){
         switch (el.id) {
             case 0:
                 //STOP Command
-                if(el.args === "LISTENING"){
-                    speechReg.stop();
-                }
                 break;
             case 1:
                 //OPEN Command case
