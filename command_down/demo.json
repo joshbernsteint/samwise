@@ -1,0 +1,35 @@
+{
+    "OPEN": [
+        {
+            "label": "Time and YouTube",
+            "id": 1.1,
+            "format": [
+                "[W]"
+            ],
+            "allowed_inputs": [
+                "TIME",
+                "YOUTUBE"
+            ],
+            "actions": [
+                {
+                    "input": "TIME",
+                    "type": "CMD_LINE",
+                    "has_response": false,
+                    "has_callback": true,
+                    "callback": {
+                        "type": "SAY_OUTPUT"
+                    },
+                    "command": "TIME /T"
+                },
+                {
+                    "input": "YOUTUBE",
+                    "type": "URL_OPEN",
+                    "has_response": false,
+                    "has_callback": false,
+                    "url": "https://youtube.com",
+                    "opener": "D:/Coding/samwise/scripts/firefox.bat"
+                }
+            ]
+        }
+    ]
+}
