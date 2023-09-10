@@ -78,16 +78,8 @@ class Option:
         return result
 
 
-class Command:
-    def __init__(self, label: str, options: list[Option]):
-        self.name = label.upper()
-        self.option_list = options
-
-    def toDict(self):
-        pass
-
 class CommandList:
-    def __init__(self, command_list: list[Command]):
+    def __init__(self, command_list: list[tuple[str,Option]]):
         self.commands = command_list
     
     def toJSON(self,fileName):
@@ -96,7 +88,7 @@ class CommandList:
         lower_id = 1
         for command in self.commands:
             temp_list = []
-            for option in command.option_list:
+            for option in command[1]:
                 temp_list.append({
                     "label": option.label,
                     "id": float(f"{upper_id}."+f"{lower_id}"),
@@ -107,7 +99,7 @@ class CommandList:
                 lower_id += 1
             upper_id += 1
             lower_id = 1
-            result[command.name] = temp_list
+            result[command[0]] = temp_list
 
         with open(fileName,'w') as json_file:
             temp_str = json.dumps(result, indent=4)
