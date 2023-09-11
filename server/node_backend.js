@@ -2,7 +2,6 @@ require('dotenv').config(); //Used for .env file
 const cors = require('cors');
 const cp = require('child_process');
 const express = require('express');
-const command_list = require('./commands.json');
 const response_list = require('./responses.json')
 const fs = require('fs');
 const path = require('path'); 
@@ -12,41 +11,110 @@ app.use(cors());
 app.use(express.json());
 const socket_path = "sockets/client";
 
+const command_json_name = "SAMWISE_COMMANDS.json"
 
-/**
- * Converts the node command id to the socket command id
- * @param node_id: The id passed by the frontend server
- * @param args: The args
- */
-function getCommandID(node_id, args){
-  var id = -1;
-  switch (node_id) {
-      case 1:
-          const opt_list = command_list.OPEN.accepted.W;
-          //OPEN case
-          const arg_id = opt_list.findIndex(args) + 1;
-          id =  1100 + arg_id;
-          break;
-      case 9:
-          //SHUTDOWN case
-          id =  9962;
-          break;
-      case 4:
-          //TODO: GO case
-      default:
-          break;
-  }
+var REGISTERED_COMMANDS = {};
+var UNIQUE_COMMANDS = [];
 
-  return id;
+
+var USER_PARSED_COMMANDS = [];
+var REQUIRE_USER_RESPONSE = false;
+
+function getCommands(){
+    const data = fs.readFileSync(command_json_name);
+    const json_data = data.toJSON();
+    REGISTERED_COMMANDS = json_data;
+    UNIQUE_COMMANDS = Object.keys(json_data);
 }
+
+
+
+function isIn(el, list){
+  return !list.every(item => {
+    if(item === el){
+      return false;
+    }
+    return true;
+  })
+}
+
 
 
 app.get('/', (req, res) => {
     res.send('')
 })
 
+app.get('/command/register/:fileName', (req,res) => {
+  if(!fs.existsSync(req.params.fileName)){
+      res.send({has_error: true,error: "JSON file could not be found"});
+  }
+  else{
+    fs.renameSync(command_json_name,"__temp__.json");
+    const basename = fs.basename(req.params.fileName);
+    fs.copyFileSync(req.params.fileName,command_json_name);
+    if(fs.existsSync(command_json_name)){
+      fs.unlinkSync("__temp__.json");
+      getCommands();
+    }
+    else{
+      fs.renameSync("__temp__.json", command_json_name);
+    }
+  }
+})
+
+app.get('/command/parse', (req, res) => {
+  const input = req.body;
+  const current_command_base = {key: "", args: [], option_index: -1};
+  var found_commands = [];
+  var current_command = current_command_base;
+  var KEYED_COMMAND = {};
+
+  function AddIfValidArgument(str){
+    //TODO: Make this not suck
+      return !KEYED_COMMAND.every((option, i) => {
+          if(isIn(str, option)){
+              current_command = {...current_command, option_index: i, args: [...current_command.args, str]};
+              return false;
+          }
+          return true;
+      })
+  }
+
+  for(let index = 0; index < input.length; index++) {
+    const element = input[index];
+    if(isIn(element,UNIQUE_COMMANDS)){
+      if(current_command.key !== ""){
+          found_commands.push(current_command);
+          current_command = current_command_base;
+      }
+      current_command =  {...current_command, key: element};
+      KEYED_COMMAND = REGISTERED_COMMANDS[element];
+    }
+    else if(current_command.key !== ""){
+        AddIfValidArgument(element);
+
+    }
+  }
+
+  USER_PARSED_COMMANDS = found_commands;
+
+  respones = [];
+  callbacks = [];
+  found_commands.forEach((element,i) => {
+      const actions = REGISTERED_COMMANDS[element.key][element.option_index].actions;
+      actions.forEach((el) => {
+        if(el.has_response){
+          responses.push({command_index: i, response: el.response});
+        }
+        else if(el.has_callback){
+          callbacks.push({command_id: i, callback: el.callback});
+        }
+      })
+  });
+})
+
 app.get('/get_command_list', (req,res) => {
-  res.send({commands: command_list, responses: response_list});
+  res.send({commands: REGISTERED_COMMANDS, responses: response_list});
 });
 
 app.get('/get_token/:type', (req, res) => {
@@ -60,19 +128,6 @@ app.get('/get_token/:type', (req, res) => {
       break;
   }
 })
-
-app.post('/run_command',(req,res) =>{
-  const command = req.body;
-  command.args.forEach(element => {
-    const id = getCommandID(command.id,element);
-    cp.exec(`"${socket_path}" ${id}`, (err, stdout, stderr) => {
-      if(stdout !== "0"){
-        console.log("An error has occured, error code: ",stdout);
-      }
-    });
-  });
-  res.send('All Good!');
-});
 
 
 
